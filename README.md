@@ -94,9 +94,9 @@ anudip java jdbc project/
 1. Open file: `src\util\DatabaseConnection.java`
 2. Find these lines:
 ```java
-private static final String PASSWORD = "Nabhyadav@682";
+private static final String PASSWORD = "Ankit@123";
 ```
-3. Replace `Nabhyadav@682` with YOUR MySQL root password
+3. Replace `Ankit@123` with YOUR MySQL root password
 4. Save the file
 
 ### Step 3: Create Database and Tables
