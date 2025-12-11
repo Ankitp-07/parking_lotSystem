@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parking Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">P</div>
+            <h2>ParkEase</h2>
+        </div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-item active" data-tab="dashboard">
+                <span class="icon">📊</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-tab="park">
+                <span class="icon">🚗</span>
+                <span>Park Vehicle</span>
+            </a>
+            <a href="#" class="nav-item" data-tab="exit">
+                <span class="icon">🚪</span>
+                <span>Exit Vehicle</span>
+            </a>
+            <a href="#" class="nav-item" data-tab="search">
+                <span class="icon">🔍</span>
+                <span>Search</span>
+            </a>
+            <a href="#" class="nav-item" data-tab="parked">
+                <span class="icon">🅿️</span>
+                <span>Parked Vehicles</span>
+            </a>
+            <a href="#" class="nav-item" data-tab="history">
+                <span class="icon">📜</span>
+                <span>History</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="time" id="liveTime"></div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <header class="topbar">
+            <h1 id="pageTitle">Dashboard</h1>
+            <div class="user-info">
+                <span class="status-dot"></span>
+                <span>System Active</span>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                <div class="stats-grid">
+                    <div class="stat-box blue">
+                        <div class="stat-header">
+                            <span class="stat-icon">🚗</span>
+                            <span class="stat-title">Car Parking</span>
+                        </div>
+                        <div class="stat-body">
+                            <div class="stat-main">
+                                <span class="stat-number" id="carAvailable">0</span>
+                                <span class="stat-label">Available</span>
+                            </div>
+                            <div class="stat-total">of <span id="carTotal">0</span> total</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-box orange">
+                        <div class="stat-header">
+                            <span class="stat-icon">🏍️</span>
+                            <span class="stat-title">Bike Parking</span>
+                        </div>
+                        <div class="stat-body">
+                            <div class="stat-main">
+                                <span class="stat-number" id="bikeAvailable">0</span>
+                                <span class="stat-label">Available</span>
+                            </div>
+                            <div class="stat-total">of <span id="bikeTotal">0</span> total</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-box green">
+                        <div class="stat-header">
+                            <span class="stat-icon">💰</span>
+                            <span class="stat-title">Car Rate</span>
+                        </div>
+                        <div class="stat-body">
+                            <div class="stat-main">
+                                <span class="stat-number">₹30</span>
+                                <span class="stat-label">Base (2hrs)</span>
+                            </div>
+                            <div class="stat-total">+ ₹10/hour</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-box purple">
+                        <div class="stat-header">
+                            <span class="stat-icon">💵</span>
+                            <span class="stat-title">Bike Rate</span>
+                        </div>
+                        <div class="stat-body">
+                            <div class="stat-main">
+                                <span class="stat-number">₹20</span>
+                                <span class="stat-label">Base (2hrs)</span>
+                            </div>
+                            <div class="stat-total">+ ₹5/hour</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-section">
+                    <h3>Recent Transactions</h3>
+                    <div id="dashboardHistory" class="transaction-list"></div>
+                </div>
+            </div>
+
+            <!-- Park Vehicle Tab -->
+            <div id="park" class="tab-content">
+                <div class="form-card">
+                    <h2>Park New Vehicle</h2>
+                    <form id="parkForm">
+                        <div class="vehicle-type-selector">
+                            <label class="type-card">
+                                <input type="radio" name="vehicleType" value="CAR" required>
+                                <div class="type-content">
+                                    <span class="type-icon">🚗</span>
+                                    <span class="type-name">Car</span>
+                                </div>
+                            </label>
+                            <label class="type-card">
+                                <input type="radio" name="vehicleType" value="BIKE" required>
+                                <div class="type-content">
+                                    <span class="type-icon">🏍️</span>
+                                    <span class="type-name">Bike</span>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="input-group">
+                            <label>Vehicle Number</label>
+                            <input type="text" id="parkNumber" placeholder="UP14AB1234" required>
+                        </div>
+                        <button type="submit" class="btn-submit">Park Vehicle</button>
+                    </form>
+                    <div id="parkResult" class="result-box"></div>
+                </div>
+            </div>
+
+            <!-- Exit Vehicle Tab -->
+            <div id="exit" class="tab-content">
+                <div class="form-card">
+                    <h2>Exit Vehicle & Generate Bill</h2>
+                    <form id="exitForm">
+                        <div class="input-group">
+                            <label>Vehicle Number</label>
+                            <input type="text" id="exitNumber" placeholder="Enter vehicle number" required>
+                        </div>
+                        <button type="submit" class="btn-submit danger">Generate Bill</button>
+                    </form>
+                    <div id="exitResult" class="result-box"></div>
+                </div>
+            </div>
+
+            <!-- Search Tab -->
+            <div id="search" class="tab-content">
+                <div class="form-card">
+                    <h2>Search Vehicle</h2>
+                    <form id="searchForm">
+                        <div class="input-group">
+                            <label>Vehicle Number</label>
+                            <input type="text" id="searchNumber" placeholder="Enter vehicle number" required>
+                        </div>
+                        <button type="submit" class="btn-submit secondary">Search</button>
+                    </form>
+                    <div id="searchResult" class="result-box"></div>
+                </div>
+            </div>
+
+            <!-- Parked Vehicles Tab -->
+            <div id="parked" class="tab-content">
+                <div class="history-card">
+                    <h2>Currently Parked Vehicles</h2>
+                    <div class="stats-grid" style="margin-bottom:1.5rem;">
+                        <div class="stat-box blue">
+                            <div class="stat-header">
+                                <span class="stat-icon">🚗</span>
+                                <span class="stat-title">Cars Parked</span>
+                            </div>
+                            <div class="stat-body">
+                                <div class="stat-main">
+                                    <span class="stat-number" id="parkedCars">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="stat-box orange">
+                            <div class="stat-header">
+                                <span class="stat-icon">🏍️</span>
+                                <span class="stat-title">Bikes Parked</span>
+                            </div>
+                            <div class="stat-body">
+                                <div class="stat-main">
+                                    <span class="stat-number" id="parkedBikes">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="parkedList" class="parked-grid"></div>
+                </div>
+            </div>
+
+            <!-- History Tab -->
+            <div id="history" class="tab-content">
+                <div class="history-card">
+                    <h2>Transaction History</h2>
+                    <div id="historyList" class="transaction-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
