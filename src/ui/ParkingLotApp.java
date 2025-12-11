@@ -40,6 +40,7 @@ public class ParkingLotApp {
         System.out.println("===================================================");
         System.out.println("     PARKING LOT MANAGEMENT SYSTEM");
         System.out.println("        Welcome to Smart Parking!");
+        System.out.println("               ParkEase                             ");
         System.out.println("===================================================\n");
     }
     
